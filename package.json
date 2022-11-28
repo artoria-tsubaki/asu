@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@knight-lab/timelinejs": "^3.9.0",
+    "gsap": "^3.11.3",
     "mv-full-page": "^3.1.5",
     "postcss-px-to-viewport": "^1.1.1",
     "vue": "^3.2.41"
