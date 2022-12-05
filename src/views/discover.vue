@@ -15,7 +15,7 @@
           <div class="line line-top"></div>
           <ul class="sections">
             <li v-for="(list, index) in menuList">
-              <a href="" :ref="`list-${index}`" @mouseenter="debounceMouseEnterHandler">
+              <a href="" :ref="`list-${index}`" class="menuItem" @mouseenter="debounceMouseEnterHandler">
                 <span></span>
                 <div class="line-big">{{ list.title }}</div>
                 <div class="line-sub">{{ list.sub }}</div>
@@ -71,6 +71,9 @@
 <script setup lang="ts">
 import { debounce, throttle, scale } from '@/utils/common.js'
 import gsap from 'gsap'
+import CustomEase from 'gsap/CustomEase'
+import { cursorTo } from 'readline';
+import { onMounted } from 'vue';
 console.log(gsap.to)
 const menuList = [
   {
@@ -94,34 +97,39 @@ const menuList = [
     sub: 'info and advice',
   },
 ]
+let menuItemSelected:number = -1
+let menuItemLists:Element[]
+let t: number
+onMounted(() => {
+  menuItemLists = Array.from(document.querySelectorAll('.menuItem'))
+  // enterMenuItemFunc(0)
+  const tl = gsap.timeline()
+  console.log(tl.staggerTo);
+  
+})
+
+CustomEase.create('menuItem', 'M0,0 C0.2,0.7 0.25,1 1,1')
+// CustomEase.create('menuItemLine', 'M0,0 C0.8,0 0.2,1 1,1')
+CustomEase.create('menuItemLine', 'M0,0 C0.371,0.142 0.327,-0.009 0.625,0.1 0.908,0.204 0.715,1.001 1,1 ')
+
 const menuListData = []
 const menuItemMouseEnterHandler = (e: Event) => {
-  const menuItem = e.target!
-  const cursor = (menuItem as HTMLLinkElement).querySelector('span')!
-  const title = (menuItem as HTMLLinkElement).querySelector('.line-big') as HTMLDivElement
-  titleAnimation(title)
-  cursorAnimation(cursor)
+  const menuItemIndex = menuItemLists.findIndex(item => item === e.target) 
+  gsap.delayedCall(0.25, enterMenuItemFunc, [menuItemIndex])
 }
-const debounceMouseEnterHandler = menuItemMouseEnterHandler
+const debounceMouseEnterHandler = debounce(menuItemMouseEnterHandler,500,true)
 
-const cursorAnimation = (cursor: HTMLElement) => {
-  cursor.style.display = 'block'
-  let tween = gsap.to(cursor, { width: '8px', duration: 1, ease: 'elastic', delay: 0.5 })
-  tween.play().then(() => {
-    setTimeout(() => {
-      gsap.to(cursor, { width: '0px', duration: 0.5 })
-    }, 2000)
-  })
+const enterMenuItemFunc = (menuItemIndex: number) => {
+  menuItemIndex !== menuItemSelected &&
+    (gsap.to(menuItemLists[menuItemSelected]?.children[1], 1, { x: 0, ease: 'menuItem', clearProps: 'transform' }),
+    gsap.to(menuItemLists[menuItemSelected]?.children[0], 0.8, { scaleX: 0, display: 'none', ease: 'menuItemLine', clearProps: 'transform, display' }),
+    gsap.set(menuItemLists[menuItemSelected]?.children[0], { display: 'none' }),
+    (menuItemSelected = menuItemIndex),
+    gsap.to(menuItemLists[menuItemIndex].children[1], 1, { x: 0.01 * window.innerWidth, ease: 'menuItem' }),
+    gsap.to(menuItemLists[menuItemIndex].children[0], 1.05, { display: 'block', scaleX: 1, ease: 'menuItemLine' }))
+    // this.changeBgImage())
 }
 
-const titleAnimation = (title: HTMLElement) => {
-  let tween = gsap.to(title, { x: '16.2px', duration: 1, ease: 'power1.out' })
-  tween.play().then(() => {
-    setTimeout(() => {
-      tween.reverse()
-    }, 2000)
-  })
-}
 </script>
 
 <style lang="less" scoped>
@@ -238,10 +246,11 @@ const titleAnimation = (title: HTMLElement) => {
                 position: absolute;
                 top: 2.7vh;
                 left: 0;
-                // width: 0.6vw;
+                width: 0.6vw;
                 height: 1px;
                 background-color: #434148;
                 transform-origin: 0 50%;
+                transform: scaleX(0);
               }
               .line-big {
                 font-size: 2.3vh;
