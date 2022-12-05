@@ -2,9 +2,9 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 
-import { computed, nextTick, reactive, ref, watch } from 'vue';
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 
-import Home from './views/discover.vue'
+import Home from './views/command.vue'
 import Timeline from './views/timeline.vue'
 
 // fullpage 参数
@@ -13,11 +13,11 @@ const state = reactive({
   page: 1,
   config: {
     disabled: false,
-    direction: "v",
+    direction: 'v',
     cache: true,
     bgArr: [],
     bgConfig: {
-      fit: 'fill'
+      fit: 'fill',
     },
     //  循环播放
     loop: true,
@@ -34,7 +34,7 @@ const state = reactive({
       next: true,
     },
     poi: {
-      className: "my-poi",
+      className: 'my-poi',
     },
   } as any,
 })
@@ -60,12 +60,10 @@ const videoPaused = computed(() => {
         <Home :isCurrentShow="videoPaused"></Home>
       </template>
       <template #page2>
-          <Timeline></Timeline>
+        <!-- <Timeline></Timeline> -->
       </template>
       <template #page3>
-        <div>
-          567
-        </div>
+        <div>567</div>
       </template>
     </mv-full-page>
   </div>

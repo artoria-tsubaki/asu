@@ -8,3 +8,5 @@ declare module '*.vue' {
 
 declare module '@knight-lab/timelinejs';
 declare module '@/utils/common.js';
+declare module '@/utils/command.js';
+declare module '@/utils/TweenMax.min.js';

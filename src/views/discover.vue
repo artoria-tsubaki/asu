@@ -72,8 +72,8 @@
 import { debounce, throttle, scale } from '@/utils/common.js'
 import gsap from 'gsap'
 import CustomEase from 'gsap/CustomEase'
-import { cursorTo } from 'readline';
-import { onMounted } from 'vue';
+import { cursorTo } from 'readline'
+import { onMounted } from 'vue'
 console.log(gsap.to)
 const menuList = [
   {
@@ -97,15 +97,14 @@ const menuList = [
     sub: 'info and advice',
   },
 ]
-let menuItemSelected:number = -1
-let menuItemLists:Element[]
+let menuItemSelected: number = -1
+let menuItemLists: Element[]
 let t: number
 onMounted(() => {
   menuItemLists = Array.from(document.querySelectorAll('.menuItem'))
   // enterMenuItemFunc(0)
   const tl = gsap.timeline()
-  console.log(tl.staggerTo);
-  
+  console.log(tl.staggerTo)
 })
 
 CustomEase.create('menuItem', 'M0,0 C0.2,0.7 0.25,1 1,1')
@@ -114,10 +113,10 @@ CustomEase.create('menuItemLine', 'M0,0 C0.371,0.142 0.327,-0.009 0.625,0.1 0.90
 
 const menuListData = []
 const menuItemMouseEnterHandler = (e: Event) => {
-  const menuItemIndex = menuItemLists.findIndex(item => item === e.target) 
+  const menuItemIndex = menuItemLists.findIndex((item) => item === e.target)
   gsap.delayedCall(0.25, enterMenuItemFunc, [menuItemIndex])
 }
-const debounceMouseEnterHandler = debounce(menuItemMouseEnterHandler,500,true)
+const debounceMouseEnterHandler = debounce(menuItemMouseEnterHandler, 500, true)
 
 const enterMenuItemFunc = (menuItemIndex: number) => {
   menuItemIndex !== menuItemSelected &&
@@ -127,9 +126,8 @@ const enterMenuItemFunc = (menuItemIndex: number) => {
     (menuItemSelected = menuItemIndex),
     gsap.to(menuItemLists[menuItemIndex].children[1], 1, { x: 0.01 * window.innerWidth, ease: 'menuItem' }),
     gsap.to(menuItemLists[menuItemIndex].children[0], 1.05, { display: 'block', scaleX: 1, ease: 'menuItemLine' }))
-    // this.changeBgImage())
+  // this.changeBgImage())
 }
-
 </script>
 
 <style lang="less" scoped>
@@ -153,7 +151,7 @@ const enterMenuItemFunc = (menuItemIndex: number) => {
       .bg {
         width: 100%;
         height: 100%;
-        background-image: url(../assets/bg/bg-menu-small.jpg);
+        background-image: url(@/assets/bg/bg-menu-small.jpg);
         background-position: 100%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -169,7 +167,7 @@ const enterMenuItemFunc = (menuItemIndex: number) => {
       .bg {
         width: 100%;
         height: 100%;
-        background-image: url(../assets/bg/bg-menu-big.jpg);
+        background-image: url(@/assets/bg/bg-menu-big.jpg);
         background-position: 100%;
         background-repeat: no-repeat;
         background-size: cover;
