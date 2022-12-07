@@ -84,10 +84,16 @@ class TextFX {
       down: (_) => {
         this.DOM.texts[this.middleIdx + pos].style.opacity = action === 'show' ? 1 : 0
       },
+      blur: (_) => {
+        setTimeout(() => {
+          this.DOM.texts[this.middleIdx].classList.add('content__text-inner--center')
+        }, this.loopInterval.show * this.DOM.textsTotal)
+      }
     }
     if (dir === 'both') {
       changeStyle['up']()
       changeStyle['down']()
+      changeStyle['blur']()
     } else {
       changeStyle[dir]()
     }
