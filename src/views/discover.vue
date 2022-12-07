@@ -6,10 +6,10 @@
         <div class="content">
           <div class="logo">
             <a href="" class="image-logo">
-              <!-- <picture>
+              <picture>
                 <source media="(min-width: 1080px)" srcset="https://sinsekaistudio.jp/cms/wp-content/uploads/2021/11/aru_thumb.jpg" />
                 <img src="https://sinsekaistudio.jp/cms/wp-content/uploads/2021/11/asu_thumb_sp-500x353.jpg" alt="明透" />
-              </picture> -->
+              </picture>
             </a>
           </div>
           <div class="line line-top"></div>

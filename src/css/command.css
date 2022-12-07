@@ -389,6 +389,7 @@ a:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .demo-4 .content__text-wrap {
@@ -420,7 +421,8 @@ a:focus {
 
 .content__text-inner {
   display: block;
-  color: var(--color-slide-text);
+  /* color: var(--color-slide-text); */
+  color: var(--primary-role-color);
   text-transform: uppercase;
   font-size: 3.5rem;
   font-weight: var(--font-trail-weight);
@@ -452,6 +454,7 @@ a:focus {
   justify-content: center;
   font-size: 1.25rem;
   position: relative;
+  z-index: 99;
 }
 
 .content__nav-button {
